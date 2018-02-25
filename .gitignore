@@ -6,3 +6,4 @@ app.yaml
 app/scripts/gsap/
 app/scripts/jquery/
 app/scripts/scrollmagic/
+app/scripts/velocity/
