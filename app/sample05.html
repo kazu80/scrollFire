@@ -26,68 +26,30 @@
     <script src="scripts/scrollmagic/minified/plugins/animation.gsap.min.js"></script>
     <script src="scripts/scrollmagic/minified/plugins/animation.velocity.min.js"></script>
     <script src="scripts/scrollmagic/minified/plugins/debug.addIndicators.min.js"></script>
-
-    <style>
-        .active {
-            background-color : #307fb5;
-        }
-    </style>
 </head>
 <body>
 
 <!-- Your code here -->
-<form class="move">
-    <fieldset>
-        <p id="high1">One</p>
-        <p id="high2">Two</p>
-        <p id="high3">Three</p>
-        <p id="high4">Four</p>
-    </fieldset>
-</form>
-<div class="spacer s1" id="sec1">
-    <div class="box2" style="background-color: #8dbbe0">
-        <p>One</p>
-    </div>
-</div>
-<div class="spacer s1" id="sec2">
-    <div class="box2" style="background-color: #6aa6d8">
-        <p>Two</p>
-    </div>
-</div>
-<div class="spacer s1" id="sec3">
-    <div class="box2" style="background-color: #4e96d1">
-        <p>Three</p>
-    </div>
-</div>
-<div class="spacer s1" id="sec4">
-    <div class="box2" style="background-color: #307fb5">
-        <p>Four</p>
-    </div>
+<div class="spacer s2"></div>
+<div id="trigger" class="spacer s0"></div>
+<div id="target" class="box2 blue">
+    <p>Widen the horizon.</p>
 </div>
 <div class="spacer s2"></div>
 <script>
     // init controller
-    var controller = new ScrollMagic.Controller ({globalSceneOption: {duration: 100}});
+    var controller = new ScrollMagic.Controller ({vertical: false});
 
-    // build scenes
-    new ScrollMagic.Scene ({triggerElement: '#sec1'})
-        .setClassToggle ('high1', 'active') // add class toggle
-        .addIndicators ()
-        .addTo (controller);
-    new ScrollMagic.Scene ({triggerElement: '#sec2'})
-        .setClassToggle ('high2', 'active') // add class toggle
-        .addIndicators ()
-        .addTo (controller);
-    new ScrollMagic.Scene ({triggerElement: '#sec3'})
-        .setClassToggle ('high3', 'active') // add class toggle
-        .addIndicators ()
-        .addTo (controller);
-    new ScrollMagic.Scene ({triggerElement: '#sec4'})
-        .setClassToggle ('high4', 'active') // add class toggle
-        .addIndicators ()
-        .addTo (controller);
+    // build tween
+    var tween = TweenMax.to ('#target', 0.5, {backgroundColor: 'green', width: '+=400'});
 
+    // build scene
+    var scene = new ScrollMagic.Scene ({triggerElement: '#trigger', duration: 500})
+        .setTween (tween)
+        .addIndicators ()
+        .addTo (controller);
 </script>
+
 
 <!-- build:js scripts/main.min.js -->
 <script src="scripts/main.js"></script>
