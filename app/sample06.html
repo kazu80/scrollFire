@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <!-- vendor plugin -->
+    <script src="scripts/jquery/dist/jquery.min.js"></script>
+    <script src="scripts/gsap/TweenMax.js"></script>
+    <script src="scripts/velocity.min.js"></script>
+
+    <!-- scroll magic -->
+    <script src="scripts/scrollmagic/minified/ScrollMagic.min.js"></script>
+    <script src="scripts/scrollmagic/minified/plugins/jquery.ScrollMagic.min.js"></script>
+    <script src="scripts/scrollmagic/minified/plugins/animation.gsap.min.js"></script>
+    <script src="scripts/scrollmagic/minified/plugins/animation.velocity.min.js"></script>
+    <script src="scripts/scrollmagic/minified/plugins/debug.addIndicators.min.js"></script>
+</head>
+<body>
+
+<!-- Your code here -->
+<div class="spacer s0" id="trigger"></div>
+<div id="animate" class="box1 blue">
+    <p>Just breathe.</p>
+</div>
+
+<script>
+    // init controller
+    var controller = new ScrollMagic.Controller ();
+
+    // build tween
+    var tween = new TweenMax.to ('#animate', 0.5, {scale: 1.3, repeat: 5, yoyo: true});
+
+    // build scene and set duration to window height
+    var scene = new ScrollMagic.Scene ({triggerElement: '#trigger', duration: '100%'})
+        .setTween (tween)
+        .addIndicators ()
+        .addTo (controller);
+
+</script>
+
+<!-- build:js scripts/main.min.js -->
+<script src="scripts/main.js"></script>
+<!-- endbuild -->
+</body>
+</html>
