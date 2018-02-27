@@ -26,68 +26,92 @@
     <script src="scripts/scrollmagic/minified/plugins/animation.gsap.min.js"></script>
     <script src="scripts/scrollmagic/minified/plugins/animation.velocity.min.js"></script>
     <script src="scripts/scrollmagic/minified/plugins/debug.addIndicators.min.js"></script>
-
-    <style>
-        .active {
-            background-color : #307fb5;
-        }
-    </style>
 </head>
 <body>
 
 <!-- Your code here -->
-<form class="move">
-    <fieldset>
-        <p id="high1">One</p>
-        <p id="high2">Two</p>
-        <p id="high3">Three</p>
-        <p id="high4">Four</p>
-    </fieldset>
-</form>
-<div class="spacer s1" id="sec1">
-    <div class="box2" style="background-color: #8dbbe0">
-        <p>One</p>
-    </div>
-</div>
-<div class="spacer s1" id="sec2">
-    <div class="box2" style="background-color: #6aa6d8">
-        <p>Two</p>
-    </div>
-</div>
-<div class="spacer s1" id="sec3">
-    <div class="box2" style="background-color: #4e96d1">
-        <p>Three</p>
-    </div>
-</div>
-<div class="spacer s1" id="sec4">
-    <div class="box2" style="background-color: #307fb5">
-        <p>Four</p>
-    </div>
-</div>
-<div class="spacer s2"></div>
-<script>
-    // init controller
-    var controller = new ScrollMagic.Controller ({globalSceneOption: {duration: 100}});
+<div class="scrollContent">
+    <section id="titlechart">
+        <div id="description">
+            <h1>Trigger CSS Animations</h1>
+            <h2>Look, Ma! No animation framework needed!</h2>
+            <p>
+                Note this will not work IE9, as it doesn't support CSS transitions.
+            </p>
+            <ol>
+                <li>The easiest way to animate using CSS is by defining a class that contains the changes and then
+                    appling the class to element using<a href="../basic/class_toggles.html">class toggles</a></li>
+                <li>The alternatives is to change an object's inline style using ScrollMagic's scene events.</li>
+            </ol>
+            <p>
+                Sadly there is no timeline object for css animation, so they can only be triggered and not have their
+                progress directly bound to scroll progress.
+            </p>
+            <p>
+                The duration can however be used to revert the animation to the previous state after a specific scroll
+                distance. if classes are used for animating this happens automatically if the scene has a duration.
+            </p>
+        </div>
+        <script>
+            // init Controller
+            var controller = new ScrollMagic.Controller ();
+        </script>
+        <section class="demo">
+            <style type="text/css">
+                #animate1 {
+                    transition : transform 0.3s ease-out;
+                }
 
-    // build scenes
-    new ScrollMagic.Scene ({triggerElement: '#sec1'})
-        .setClassToggle ('high1', 'active') // add class toggle
-        .addIndicators ()
-        .addTo (controller);
-    new ScrollMagic.Scene ({triggerElement: '#sec2'})
-        .setClassToggle ('high2', 'active') // add class toggle
-        .addIndicators ()
-        .addTo (controller);
-    new ScrollMagic.Scene ({triggerElement: '#sec3'})
-        .setClassToggle ('high3', 'active') // add class toggle
-        .addIndicators ()
-        .addTo (controller);
-    new ScrollMagic.Scene ({triggerElement: '#sec4'})
-        .setClassToggle ('high4', 'active') // add class toggle
-        .addIndicators ()
-        .addTo (controller);
-
-</script>
+                .zap {
+                    transform : scale(2.5, 0);
+                }
+            </style>
+            <div class="spacer s2"></div>
+            <div id="trigger1" class="spacer s0"></div>
+            <div id="animate1" class="box1 red">
+                <p>Zap.</p>
+            </div>
+            <div class="spacer s2"></div>
+            <script>
+                // build scene
+                var scene = new ScrollMagic.Scene ({triggerElement: '#trigger1'})
+                // trigger animation by adding a css class
+                    .setClassToggle ('#animate1', 'zap')
+                    .addIndicators ({name: '1 - add a class'})
+                    .addTo (controller);
+            </script>
+        </section>
+        <section class="demo">
+            <style type="text/css">
+                #animate2 {
+                    transition : background-color 1s;
+                }
+            </style>
+            <div class="spacer s2"></div>
+            <div id="trigger2" class="spacer s0"></div>
+            <div id="animate2" class="box1 green">
+                <p>This is a gray area.</p>
+            </div>
+            <div class="spacer s2"></div>
+            <script>
+                // build scene
+                var animateElem = document.getElementById ('animate2');
+                var scene = new ScrollMagic.Scene ({triggerElement: '#trigger2', duration: 100})
+                    .on ('enter', function () {
+                        // trigger animation by changing inline style
+                        animateElem.style.backgroundColor = 'gray';
+                    })
+                    .on ('leave', function () {
+                        // reset style
+                        animateElem.style.backgroundColor = '';
+                    })
+                    .addIndicators ({name: '2 - change inline style'})
+                    .addTo (controller);
+            </script>
+        </section>
+        <div class="spacer s_viewport"></div>
+    </section>
+</div>
 
 <!-- build:js scripts/main.min.js -->
 <script src="scripts/main.js"></script>
