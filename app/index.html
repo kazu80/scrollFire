@@ -30,183 +30,55 @@
 <body>
 
 <!-- Your code here -->
-<div class="scrollContent">
-    <section id="titlechart">
-        <div id="description">
-            <h1 class="badge gsap">Advanced Tweening</h1>
-            <h2>ScrollMagic can handle everything TweenMax throws at it.</h2>
-            <ol>
-                <li>A tween can be repeated indefintely within the scene's duration.</li>
-                <li>A tween can be a timeline consisting of multiple tweens and even contain events attached to them.</li>
-                <li>Classname can be tweened just as well</li>
-                <li>Staggering and Easing are no problem either.</li>
-            </ol>
-            <p>
-                To find out more about the Greensock Animation Platform. refer to its documentation.
-            </p>
-        </div>
-        <script>
-            // init controller
-            var controller = new ScrollMagic.Controller();
-        </script>
+<style type="text/css">
+    #pinContainer {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    .panel {
+        height : 100%;
+        width: 100%;
+        position: absolute;
+    }
+</style>
+<div id="pinContainer">
+    <section class="panel blue">
+        <b>ONE</b>
     </section>
-
-    <section class="demo">
-        <div class="spacer s2"></div>
-        <div id="trigger1" class="spacer s0"></div>
-        <div id="animate1" class="box1 skin" style="left: -100px">
-            <p>tick, tick.</p>
-        </div>
-        <div class="spacer s2"></div>
-        <script>
-            // build tween
-            var tween = TweenMax.fromTo("#animate1", 1, {left: -100}, {left: 100, repeat: -1, yoyo:true, ease: Circ.easeInOut});
-
-            // build scene
-            var scene = new ScrollMagic.Scene({triggerElement: "#trigger1", duration: 200, offset: -50})
-                .setTween(tween)
-                .addIndicators({name: "loop"})
-                .addTo(controller);
-        </script>
+    <section class="panel turqoise">
+        <b>TWO</b>
     </section>
-
-    <section class="demo">
-        <div class="spacer s1"></div>
-        <div id="trigger2" class="spacer s1"></div>
-        <div class="spacer s0"></div>
-        <div id="animate2" class="box1 red" style="left: -100px">
-            <p>Let's draw!</p>
-        </div>
-        <div class="spacer s2"></div>
-        <script>
-            // set start offset
-            TweenMax.set("#animate2", {left: "-=100"});
-
-            var $box = $("#animate2 p");
-
-            // build tween
-            var tween = new TimelineMax()
-                .to("#animate2", 1, {top: "-=200",
-                    onStart: function () {
-                        $box.html("This");
-                    },
-                    onReverseComplete: function () {
-                        $box.html("Let's draw!");
-                    }
-                })
-                .to("#animate2", 1, {top: "+=200", left: "+=200",
-                    onStart: function () {
-                        $box.html("is");
-                    },
-                    onReverseComplete: function () {
-                        $box.html("This");
-                    }
-                })
-                .to("#animate2", 1, {top: "-=200",
-                    onStart: function () {
-                        $box.html("the");
-                    },
-                    onReverseComplete: function () {
-                        $box.html("is");
-                    }
-                })
-                .to("#animate2", 1, {top: "-=200",
-                    onStart: function () {
-                        $box.html("house");
-                    },
-                    onReverseComplete: function () {
-                        $box.html("the");
-                    }
-                })
-                .to("#animate2", 1, {top: "-=100", left: "+=100",
-                    onStart: function () {
-                        $box.html("of");
-                    },
-                    onReverseComplete: function () {
-                        $box.html("house");
-                    }
-                })
-                .to("#animate2", 1, {top: "+=100", left: "+=100",
-                    onStart: function () {
-                        $box.html("San...");
-                    },
-                    onReverseComplete: function () {
-                        $box.html("of");
-                    }
-                })
-                .to("#animate2", 1, {top: "+=200",
-                    onStart: function () {
-                        $box.html("Clause");
-                    },
-                    onReverseComplete: function () {
-                        $box.html("...ta");
-                    }
-                });
-
-            // build scene
-            var scene = new ScrollMagic.Scene({triggerElement: "#trigger2"})
-                .setTween(tween)
-                .addIndicators({name: "timeline"})
-                .addTo(controller);
-
-        </script>
+    <section class="panel green">
+        <b>THREE</b>
     </section>
-
-    <section class="demo">
-        <style type="text/css">
-            .fish {
-                min-width: 500px;
-            }
-        </style>
-        <div class="spacer s2"></div>
-        <div id="trigger3" class="spacer s0"></div>
-        <div id="animate3" class="box2 blue">
-            <p>I caught a fish THIS big.</p>
-        </div>
-        <div class="spacer s2"></div>
-        <script>
-            // build tween
-            var tween = TweenMax.to("#animate3", 1, {className: "+=fish"});
-
-            // build scene
-            var scene = new ScrollMagic.Scene({triggerElement: "#trigger3", duration: 200, offset: -50})
-                .setTween(tween)
-                .addIndicators({name: "tween css class"})
-                .addTo(controller);
-        </script>
+    <section class="panel bordeaux">
+        <b>FOUR</b>
     </section>
-
-    <section class="demo" style="overflow-x: hidden">
-        <div class="spacer s1"></div>
-        <div id="trigger4" class="spacer s1"></div>
-        <div class="spacer s0"></div>
-        <div class="animate4 box2 black outline">
-            <p>Tchoo Tchoo!</p>
-        </div>
-        <div class="animate4 box2 black outline"></div>
-        <div class="animate4 box2 black outline"></div>
-        <div class="animate4 box2 black outline"></div>
-        <div class="animate4 box2 black outline"></div>
-        <div class="animate4 box2 black outline"></div>
-        <div class="animate4 box2 black outline"></div>
-        <div class="animate4 box2 black outline"></div>
-        <div class="animate4 box2 black outline"></div>
-        <div class="animate4 box2 black outline"></div>
-        <div class="animate4 box2 black outline"></div>
-        <div class="spacer s2"></div>
-        <script>
-            // build tween
-            var tween = TweenMax.staggerFromTo(".animate4", 2, {left:700}, {left:0, ease:Back.easeOut}, 0.15);
-
-            // build scene
-            var scene = new ScrollMagic.Scene({triggerElement: "#trigger4", duration: 300})
-                .setTween(tween)
-                .addIndicators({name: "staggering"})
-                .addTo(controller);
-        </script>
-    </section>
-    <div class="spacer s_viewport"></div>
 </div>
+<script>
+    $(function () { // wait for document ready
+        // init
+        var controller = new ScrollMagic.Controller();
+
+        // define movement of panels
+        var wipeAnimation = new TimelineMax()
+            .fromTo("section.panel.turqpise", 1, {x:"-100%"}, {x:"0%", ease: Linear.easeNone}) // in from left
+            .fromTo("section.panel.green", 1, {x: "100%"}, {x: "0%", ease: Linear.easeNone}) // in from right
+            .fromTo("section.panel.bordeaux", 1, {y: "-100%"}, {y: "0%", ease: Linear.easeNone}); // in from top
+
+        // create scene to pin and link animation
+        new ScrollMagic.Scene({
+                                  triggerElement: "#pinContainer",
+                                  triggerHook: "onLeave",
+                                  duration: "300%",
+                              })
+            .setPin("#pinContainer")
+            .setTween(wipeAnimation)
+            .addIndicators()
+            .addTo(controller);
+    })
+</script>
 
 <!-- build:js scripts/main.min.js -->
 <script src="scripts/main.js"></script>
